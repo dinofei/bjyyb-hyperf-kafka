@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 namespace Hyperf\Kafka;
 
 use Hyperf\Contract\ConfigInterface;
@@ -53,19 +54,24 @@ class Producer
         $this->name = $name;
     }
 
-    public function send(string $topic, ?string $value, ?string $key = null, array $headers = [], ?int $partitionIndex = null): void
+    public function send(ProduceMessage $message): void
     {
+        $topic = $message->getTopic();
+        $value = $message->getValue();
+        $key = $message->getKey();
+        $headers = $message->getHeaders();
+        $partitionIndex = $message->getPartitionIndex();
         $this->loop();
         $ack = new Channel();
         $this->chan->push(function () use ($topic, $key, $value, $headers, $partitionIndex, $ack) {
             try {
-                if (! isset($this->topicsMeta[$topic])) {
+                if (!isset($this->topicsMeta[$topic])) {
                     $this->producer->send($topic, $value, $key, $headers);
                     $ack->close();
                     return;
                 }
 
-                if (! is_int($partitionIndex)) {
+                if (!is_int($partitionIndex)) {
                     $index = $this->getIndex($key, $value, count($this->topicsMeta[$topic]));
                     $partitionIndex = array_keys($this->topicsMeta[$topic])[$index];
                 }
@@ -141,7 +147,7 @@ class Producer
 
                 while (true) {
                     $closure = $this->chan->pop();
-                    if (! $closure) {
+                    if (!$closure) {
                         break;
                     }
                     $closure->call($this);

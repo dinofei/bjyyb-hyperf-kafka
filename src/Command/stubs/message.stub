@@ -28,11 +28,6 @@ class %CLASS% extends ProduceMessage
      */
     protected $headers = [];
 
-    /**
-     * @var string
-     */
-    public $pool = 'default';
-
     public function __construct($payload)
     {
         $this->value  = $payload;

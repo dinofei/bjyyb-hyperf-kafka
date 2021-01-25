@@ -33,11 +33,10 @@ php bin/hyperf.php gen:kafka-message TestMessage
 - $value 发送内容
 - $key 用于计算发送到那个分区
 - $headers 没使用
-- $pool 连接池
 
 *发送消息*
 ```php
 $message = new App\Kafka\Producer\TestMessage('hello kafka');
-$producer = make(Hyperf\Kafka\Manager\Producer::class);
+$producer = make(Hyperf\Kafka\Producer::class);
 $producer->send($message);
 ```
