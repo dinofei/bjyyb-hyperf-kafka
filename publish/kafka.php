@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 use Hyperf\Kafka\Constants\KafkaStrategy;
 
 return [
@@ -18,18 +19,22 @@ return [
         'recv_timeout' => -1,
         'client_id' => '',
         'max_write_attempts' => 3,
+        // 实例列表
         'brokers' => [
             '127.0.0.1:9092',
         ],
+        // 生产者启动服务
         'bootstrap_server' => [
             '127.0.0.1:9092',
         ],
+        // 自动更新实例
         'update_brokers' => true,
         'acks' => 0,
         'producer_id' => -1,
         'producer_epoch' => -1,
         'partition_leader_epoch' => -1,
-        'broker' => '',
+        // 消费者启动服务
+        'broker' => '127.0.0.1:9092',
         'interval' => 0,
         'session_timeout' => 60,
         'rebalance_timeout' => 60,

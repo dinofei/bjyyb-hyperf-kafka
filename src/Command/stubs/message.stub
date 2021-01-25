@@ -1,0 +1,40 @@
+<?php
+
+declare(strict_types=1);
+
+namespace %NAMESPACE%;
+
+use longlang\phpkafka\Producer\ProduceMessage;
+
+class %CLASS% extends ProduceMessage
+{
+    /**
+     * @var string
+     */
+    protected $topic = '%CLASS%';
+
+    /**
+     * @var string|null
+     */
+    protected $value;
+
+    /**
+     * @var string|null
+     */
+    protected $key = null;
+
+    /**
+     * @var array
+     */
+    protected $headers = [];
+
+    /**
+     * @var string
+     */
+    public $pool = 'default';
+
+    public function __construct($payload)
+    {
+        $this->value  = $payload;
+    }
+}

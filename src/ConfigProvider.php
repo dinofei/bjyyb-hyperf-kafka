@@ -9,8 +9,11 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 namespace Hyperf\Kafka;
 
+use Hyperf\Kafka\Command\Consumer;
+use Hyperf\Kafka\Command\Message;
 use Hyperf\Kafka\Listener\AfterWorkerExitListener;
 use Hyperf\Kafka\Listener\BeforeMainServerStartListener;
 
@@ -23,9 +26,10 @@ class ConfigProvider
                 BeforeMainServerStartListener::class => 99,
                 AfterWorkerExitListener::class => 1,
             ],
-            'dependencies' => [
-            ],
+            'dependencies' => [],
             'commands' => [
+                Message::class,
+                Consumer::class,
             ],
             'annotations' => [
                 'scan' => [

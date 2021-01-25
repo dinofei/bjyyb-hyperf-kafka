@@ -1,5 +1,5 @@
 {
-    "name": "hyperf/kafka",
+    "name": "bjyyb/hyperf-kafka",
     "description": "移植hyperf官方kafka组件的beta版，修复一些问题",
     "license": "MIT",
     "keywords": [
@@ -30,7 +30,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "HyperfTest\\Kafka\\": "tests/"
+            "HyperfTest\\Kafka\\": "tests/",
+            "hyperf/devtool": "~2.1.0"
         }
     },
     "config": {
