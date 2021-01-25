@@ -10,7 +10,7 @@ use Hyperf\Kafka\Result;
 use longlang\phpkafka\Consumer\ConsumeMessage;
 
 /**
-* @Consumer(topic="%CLASS%", nums=1, groupId="%CLASS%", autoCommit=false, enable=true)
+* @Consumer(topic="%CLASS%", nums=1, groupId="%CLASS%", autoCommit=false, enable=true, pool="default")
 */
 class %CLASS% extends AbstractConsumer
 {
